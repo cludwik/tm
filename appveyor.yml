@@ -20,3 +20,16 @@ environment:
   matrix:
     - platform: mingw
       configuration: Debug
+
+# to run your custom scripts instead of automatic MSBuild
+build_script:
+  - make all
+
+#---------------------------------#
+#       tests configuration       #
+#---------------------------------#
+
+# to run your custom scripts instead of automatic tests
+test_script:
+  - make test
+
