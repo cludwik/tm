@@ -26,6 +26,14 @@ build_script:
   - make all
 
 #---------------------------------#
+#    environment configuration    #
+#---------------------------------#
+
+# scripts that are called at very beginning, before repo cloning
+init:
+  - PATH=%PATH%;C:\MinGW\bin
+
+#---------------------------------#
 #       tests configuration       #
 #---------------------------------#
 
