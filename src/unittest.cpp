@@ -10,13 +10,13 @@
 /* Test case constants */
 #define ARGC 2 //!< Number of command line parameters that are required
 
-/** FileName_01 test case will be testing:
+/** Test case will be testing:
  *    . Return code from validate_arg() is always true
  *    . The output file names have been correctly constructed
  * Additional notes. The file names which are tested must also exist under the
  * "testdata/" folder.
  */
-TESTCASE_WITH_DATA(FileName_01,
+TESTCASE_WITH_DATA(Filenames_01,
     int argc;
     const char *argv1;
     const char *outName;
@@ -35,7 +35,7 @@ TESTCASE_WITH_DATA(FileName_01,
      * source filename */
     T_COMPARE(strcmp(g_ofname, data->outName), 0);
 }
-TESTCASE_POPULATE_DATA(FileName_01)
+TESTCASE_POPULATE_DATA(Filenames_01)
 {
     .rowName  = "Path and name with leading dots",
     .argc     = ARGC,
@@ -79,6 +79,28 @@ TESTCASE_POPULATE_DATA(FileName_01)
     .outName  = "testdata/names2-graded.txt"
 },
 TESTCASE_POPULATE_DATA_END
+
+/** Test case will be testing:
+ *    . Passing a non existent filename to validate_arg()
+ *    . Confirming the return is false
+ *    . Confirming global destination filename is unset
+ */
+TESTCASE(Filenames_02)
+{
+    /* Put together the argv as though it came from a command prompt */
+    char *argv[] = {
+        (char*)"",
+        (char*)"this/file/will/never/exist"
+    };
+    /* Set the global g_ofname to a random string */
+    strcpy(g_ofname, "ABCxyz");
+    /* Execute our function under test */
+    bool r=validate_arg(ARGC, argv);
+    /* Make sure the return code is always false */
+    T_COMPARE(r, false);
+    /* Make sure that the destination filename was correctly unset */
+    T_COMPARE(strcmp(g_ofname, ""), 0);
+}
 
 /** Application entry point. This application requires no command line
  * parameters. Normally we would use something like cppunit but this is just
