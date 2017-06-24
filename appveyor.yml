@@ -31,11 +31,10 @@ build_script:
 
 # scripts that are called at very beginning, before repo cloning
 init:
-  - PATH=%PATH%;C:\MinGW\bin
-  - echo %PATH%
+  - PATH=%PATH%;C:\cygwin\bin
   - dir c:\
-  - dir c:\MinGW\
-  - dir C:\MinGW\bin
+  - dir c:\cygwin\
+  - dir C:\cygwin\bin
 
 #---------------------------------#
 #       tests configuration       #
