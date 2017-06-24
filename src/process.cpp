@@ -66,6 +66,10 @@ bool validate_arg(const int argc, char **argv)
     char fname[PATH_MAX]; /* File name pre dot */
     char fext[PATH_MAX];  /* File name post dot */
 
+    /* Initialist the destination path global and local variables */
+    g_ofname[0] = '\0';
+    fname[0] = '\0';
+    fext[0] = '\0';
     /* Make sure we only have one command line parameter */
     if (argc > (MAX_ARGS+1))
     {
@@ -100,8 +104,6 @@ bool validate_arg(const int argc, char **argv)
         SYSERR("File access error");
         return(false);
     }
-    /* Initialist the destination path global variable */
-    g_ofname[0] = '\0';
     /* The path might have '/' or '\' so break out the path and filename
      * for separate processing */
     std::string src(SRC);
@@ -112,6 +114,7 @@ bool validate_arg(const int argc, char **argv)
     {
         ++ld;
         strncpy(g_ofname, SRC, ld);
+        g_ofname[ld]='\0';
     }
     g_ofshort = ld;
     /* Count any leading dots in filename and append dots to g_ofname */
