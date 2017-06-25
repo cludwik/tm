@@ -7,7 +7,7 @@ UPTH=./ut
 # Compiler and Flags
 CC=g++
 CFLAGS=-O3 -Wall -I$(SPTH)
-CFLAGS_UT=-I$(UPTH)
+CFLAGS_UT=-I$(UPTH) -DUNITTEST
 
 # Application name
 APP=grade-scores.exe
@@ -34,17 +34,30 @@ default: all
 # Project unittest
 # ################
 
-test: $(OBJ_TEST) $(OBJ_UT) $(HEADERS)
-	$(CC) -o $(APP_TEST) $^ $(CFLAGS) $(CFLAGS_UT)
+testflags:
+	$(eval CFLAGS := $(CFLAGS) $(CFLAGS_UT))
+
+testbuild: $(OBJ_TEST) $(OBJ_UT) $(HEADERS)
+	$(CC) -o $(APP_TEST) $^ $(CFLAGS)
 	./unittest.exe
+
+test: testflags testbuild
+
+# Doxygen
+# #######
+
+docs:
+	doxygen Doxyfile
 
 # Object files
 # ############
 %.o: %.cpp
-	$(CC) -c -o $@ $< $(CFLAGS) $(CFLAGS_UT)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
 # Cleanup
 # #######
-.PHONY: clean
 clean:
 	rm -f $(SPTH)/*.o  $(UPTH)/*.o $(APP) $(APP_TEST) ./unittest.xml
+	rm -f testdata/*-graded*
+
+.PHONY: clean docs

@@ -22,6 +22,14 @@
  */
 struct s_record_order
 {
+    /** Comparison operator for s_record. The value returned indicates whether
+     * the element passed as first argument is considered to go before the
+     * second in the specific strict weak ordering it defines.
+     * @param[in] r1 First record to be compared
+     * @param[in] r2 Second record to be compared
+     * @return TRUE for r1 to be ordered before r2, FALSE for r2 to be ordered
+     *         before r1.
+     */
     inline bool operator() (const s_record &r1, const s_record &r2)
     {
         if (r1.score == r2.score)
@@ -211,6 +219,7 @@ void CSimpleCSV::dump(std::ostream &o)
 e_rwcode CSimpleCSV::read(const char *filename)
 {
     unsigned long long line;      /* Line counetr */
+    m_discarded = 0;
     std::ifstream file(filename);
     if (!file.good() || !file.is_open())
     {
@@ -230,6 +239,7 @@ e_rwcode CSimpleCSV::read(const char *filename)
         }
         else
         {
+            ++m_discarded;
             std::ostringstream msg;
             msg << "Error on line " << line << ", discarded";
             print_error(msg.str().data());

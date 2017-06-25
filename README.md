@@ -3,6 +3,10 @@ Simple test of application and continuous integration. The purpose of this
 application is to demonstrate a small C++ application and execution of unit
 test with continuous integration.
 
+To build under windows, ensure you have cywin installed and set path to
+your cygwin installation. For example if cygwin is installed in c:\cywin\
+then PATH=%PATH%;c:\cywin\bin
+
 To avoid any licensing issues, this will build on:
  * Linux platform
  * Windows platform under cygwin environment
@@ -32,6 +36,10 @@ Unit tests can be built and run with the following command. The unit test
 application name will be unittest.exe.
 
     make test
+
+To generate doxygen. The files will be availables under ./docs/ folder.
+
+    make docs
 
 Unit tests:
  * Use some same data which is available under the testdata directory.

@@ -1,5 +1,42 @@
 /* Copyright messages and all buisness related headers go here
  */
+/**
+ * @mainpage grade-score.exe, unit testing and continuous integration
+ *
+ * Simple test of application and continuous integration. The purpose of this
+ * application is to demonstrate a small C++ application and execution of unit
+ * test with continuous integration.
+ *
+ * To build under windows, ensure you have cywin installed and set path to
+ * your cygwin installation. For example if cygwin is installed in c:/cywin/
+ * then PATH=%PATH%;c:/cywin/bin
+ *
+ * To build the application grade-score.exe:
+ *     make all
+ *
+ * To build and run the unit tests:
+ *     make test
+ *
+ * To generate doxygen:
+ *     make docs
+ *
+ * @section main-grade-score Application: grade-score.exe
+ * - Takes as a parameter a string that represents a text file containing a list
+ *   of names, and their scores
+ * - Orders the names by their score. If scores are the same, order by their last
+ *   name followed by first name
+ * - Creates a new text file called <input-file-name>-graded.txt with the list of
+ *   sorted score and names
+ *
+ * @section main-unittest Application: unittest.exe
+ * - Test data is available under ./testdata/
+ * - Tests are defined in ./src/unittest.cpp
+ *
+ * @file grade-scores.cpp
+ * This file contains the implementation of grade-scores.exe application.
+ *
+ * @version
+ */
 
 /* Project C++ library */
 #include "process.h"
@@ -8,7 +45,7 @@
  * parameter which must be a valid text file for sorting.
  * @param[in] argc Number of command line arguments
  * @param[in] argv Array of command line arguments
- * @return #EXIT_OK upon success, #EXIT_FAIL otherwise
+ * @return EXIT_OK upon success, EXIT_FAIL otherwise
  */
 int main(int argc, char **argv)
 {

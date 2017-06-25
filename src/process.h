@@ -77,6 +77,12 @@ struct s_record
     std::string llast;  //!< Last name all lower case
     std::string lfirst; //!< First name all lower case
 
+    /** Contructor. Initialises internal variables and stored a transform
+     * of the passed string to lower case.
+     * @param[in] l Last name
+     * @param[in] f First name
+     * @param[in] s Score
+     */
     s_record(std::string &l, std::string &f, unsigned long long s) :
         last(l), first(f), score(s), llast(l), lfirst(f)
     {
@@ -143,9 +149,16 @@ extern bool validate_arg(const int argc, char **argv);
  */
 class CSimpleCSV
 {
+/* For simplicity, unit tests are allowed access. In more sophisticated unit
+ * test frameworks they can be friends or other methods of access. */
+#ifdef UNITTEST
+public:
+#else
 private:
+#endif
     std::string m_value[FCOL_MAX];   /**< Row of CSV data */
     std::vector<s_record> m_records; /**< All valid records read from file */
+    unsigned int m_discarded;        /**< Count of discarded rows */
 
     /** Trim white space around the given string
      * @param[in] str String to be trimmed
@@ -189,7 +202,7 @@ public:
     /** Numer of available records
      * @return Number of available records read in from CSV file
      */
-    size_t records() { return m_records.size(); }
+    unsigned int records() { return m_records.size(); }
 
     /** Sort the vector
      * Orders the names by their score. If scores are the same, order by their
