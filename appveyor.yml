@@ -41,3 +41,15 @@ init:
 test_script:
   - make test
   - powershell.exe -noexit -file "./appveyor.ps1"
+
+#---------------------------------#
+#      artifacts configuration    #
+#---------------------------------#
+
+artifacts:
+
+  # push the generated executables and unit test results
+  - path: grade-scores.exe
+    name: grade-scores
+  - path: unittest.exe
+  - path: unittest.xml
