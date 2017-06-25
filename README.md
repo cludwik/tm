@@ -4,8 +4,8 @@ application is to demonstrate a small C++ application and execution of unit
 test with continuous integration.
 
 To build under windows, ensure you have cywin installed and set path to
-your cygwin installation. For example if cygwin is installed in c:\cywin\
-then PATH=%PATH%;c:\cywin\bin
+your cygwin installation. For example if cygwin is installed in c:/cywin/
+then PATH=%PATH%;c:/cywin/bin
 
 To avoid any licensing issues, this will build on:
  * Linux platform
@@ -16,16 +16,17 @@ The application:
    of names, and their scores
  * Orders the names by their score. If scores are the same, order by their last
    name followed by first name
- * Creates a new text file called <input-file-name>-graded.txt with the list of
+ * Creates a new text file called 'input-file-name'-graded.txt with the list of
    sorted score and names
 
 Input file format is of the form:
+
  Last Name, First Name, Score
 
 Where:
- Last Name is a string
- First Name is a string
- Score is a positive integer number
+ * Last Name is a string
+ * First Name is a string
+ * Score is a positive integer number
 
 This application can be built with the following command. The application name
 will be grade-scores.exe.
@@ -42,6 +43,9 @@ To generate doxygen. The files will be availables under ./docs/ folder.
     make docs
 
 Unit tests:
- * Use some same data which is available under the testdata directory.
+ * Use data which is available under the testdata directory.
  * Generate a test artifact unittest.xml containing results of test
  * Test artifcat unittest.xml is using the junit format
+
+Continuous Integration:
+ * Has been implemented with https://www.appveyor.com/
