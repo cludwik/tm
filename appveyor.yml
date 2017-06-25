@@ -40,7 +40,7 @@ init:
 # to run your custom scripts instead of automatic tests
 test_script:
   - make test
-  - powershell.exe -noexit -file "./appveyor.ps1"
+  - powershell.exe -file "./appveyor.ps1"
 
 #---------------------------------#
 #      artifacts configuration    #
