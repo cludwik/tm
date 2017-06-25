@@ -40,5 +40,4 @@ init:
 # to run your custom scripts instead of automatic tests
 test_script:
   - make test
-  - $wc = New-Object 'System.Net.WebClient'
-  - $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\unittest.xml))
+  - powershell.exe -noexit -file "./appveyor.ps1"
